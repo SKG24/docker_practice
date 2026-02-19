@@ -26,9 +26,9 @@ WORKDIR /app
 COPY requirements.txt .
 
 # Install Python deps (separate RUN -> extra layer)
-RUN python3 -m pip install --break-system-packages --no-cache-dir --upgrade pip
- && \
-    python3 -m pip install --no-cache-dir -r requirements.txt
+RUN python3 -m pip install --break-system-packages --no-cache-dir --upgrade pip && \
+    python3 -m pip install --break-system-packages --no-cache-dir -r requirements.txt
+
     
 
 # Copy app source (another layer)
@@ -91,4 +91,5 @@ USER app
 
 EXPOSE ${PORT}
 CMD ["sh", "-c", "gunicorn -b 0.0.0.0:${PORT} app:app"]
+
 
